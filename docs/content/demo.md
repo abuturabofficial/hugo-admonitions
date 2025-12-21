@@ -3,6 +3,8 @@ title: "Admonition Demo"
 toc: true
 ---
 
+> Test various admonitions below.
+
 ## Error Test
 
 > [!NOSUPPORT]

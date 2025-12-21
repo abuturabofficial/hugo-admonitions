@@ -10,7 +10,7 @@
   {{- end -}}
 
   {{- /* Transpile Sass to CSS and render the link element once per page. */}}
-  {{- if eq .Ordinal 0 }}
+  {{- if not (.Page.Store.Get "admonition-style-loaded-flag") }}
     {{- with resources.Get "sass/vendors/_admonitions.scss" }}
       {{- $opts := dict
         "enableSourceMap" (not hugo.IsProduction)
@@ -27,6 +27,7 @@
         {{- end }}
       {{- end }}
     {{- end }}
+    {{- .Page.Store.Set "admonition-style-loaded-flag" true }}
   {{- end }}
 
   {{- /* Map alert type to icon */}}
