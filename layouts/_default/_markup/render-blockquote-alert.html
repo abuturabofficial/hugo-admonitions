@@ -57,6 +57,15 @@
 
   {{- /* Determine type and title */}}
   {{- $type := cond (index $icons .AlertType) .AlertType "note" }}
+  {{- $rawTitle := or .AlertTitle "" }}
+  {{- $headless := false }}
+  {{- if $rawTitle }}
+    {{- $trimmedTitle := $rawTitle | strings.TrimSpace }}
+    {{- $dequotedTitle := $trimmedTitle | replaceRE `["'']|&quot;|&rdquo;|&ldquo;|&rsquo;|&lsquo;|&#34;|&#39;` "" }}
+    {{- if eq ($dequotedTitle | strings.TrimSpace) "" }}
+      {{- $headless = true }}
+    {{- end }}
+  {{- end }}
   {{- $title := or .AlertTitle (T (printf "admonitions.%s" $type)) (title $type) }}
   {{- $iconFile := index $icons $type }}
   {{- $partial := printf "admonitions/icons/%s" $iconFile }}
@@ -67,7 +76,7 @@
   {{- end }}
 
   {{- /* Check if .AlertSign exists to determine if it's foldable */}}
-  {{- if .AlertSign }}
+  {{- if and .AlertSign (not $headless) }}
     {{- /* --- START Foldable Admonition HTML (using <details>) --- */}}
     {{- /* The 'open' attribute could be conditionally added based on .AlertSign, e.g., if eq .AlertSign "-" */}}
     <details class="admonition {{ $type }}">
@@ -85,11 +94,13 @@
     {{- /* --- END Foldable Admonition HTML --- */}}
   {{- else }}
     {{- /* --- START Non-Foldable Admonition HTML (using <div>) --- */}}
-    <div class="admonition {{ $type }}">
+    <div class="admonition {{ $type }}{{ if $headless }} admonition--headless{{ end }}">
+      {{- if not $headless }}
       <div class="admonition-header">
         {{- partialCached $partial . }}
         <span>{{ $title }}</span>
       </div>
+      {{- end }}
       {{- with .Text }}
       <div class="admonition-content">
         {{ . }}

@@ -20,6 +20,7 @@ If you find this project useful, please consider giving it a star! ⭐
     - [Light Mode](#light-mode)
     - [Dark Mode](#dark-mode)
     - [Header Only Mode](#header-only-mode)
+    - [Headless Mode](#headless-mode)
     - [Foldable Admonitions](#foldable-admonitions)
     - [Nested Admonitions](#nested-admonitions)
   - [Installation](#installation)
@@ -50,15 +51,19 @@ If you find this project useful, please consider giving it a star! ⭐
 
 - Dark Mode Support 🌙
 - Header Only Mode 📑
+- Headless Mode 🧩
 - Foldable Admonitions 📂
 - Multi-language Support 🌐
   - English
-  - Chinese
+  - Chinese (Simplified)
+  - Chinese (Traditional)
+  - Czech
   - French
   - German
-  - Swahili
-  - Czech
+  - Korean
   - Polish
+  - Portuguese
+  - Swahili
   - [Localization PRs are always welcome!](https://github.com/KKKZOZ/hugo-admonitions/pulls)
 
 ## Overview of all admonitions
@@ -76,6 +81,12 @@ If you find this project useful, please consider giving it a star! ⭐
 <div align="center">
   <img src="docs/assets/images/header-only-mode.png" width="500" alt="header-only-mode">
 </div>
+
+### Headless Mode
+
+Body-only callouts without a header. 
+
+![headless-callout](docs/assets/images/headless-callout.png)
 
 ### Foldable Admonitions
 
@@ -240,6 +251,18 @@ Use the Header Only mode by including a title only:
 ```
 
 ![usage-4](docs/assets/images/usage-4.png)
+
+Use the Headless mode by setting an empty title (double or single quotes):
+
+```markdown
+> [!TIP] ""
+> This is a body-only callout without a header.
+
+> [!INFO] ''
+> You can still use any callout type, but the header will be hidden.
+```
+
+![headless-callout](docs/assets/images/headless-callout.png)
 
 Use the [extended syntax](https://gohugo.io/render-hooks/blockquotes/#extended-syntax):
 

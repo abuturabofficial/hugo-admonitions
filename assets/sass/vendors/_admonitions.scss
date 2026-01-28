@@ -256,6 +256,12 @@ $admonition-dark-colors: map-merge(
   }
 }
 
+.admonition--headless {
+  .admonition-content {
+    border-radius: 4px;
+  }
+}
+
 // =============================================================================
 // --- Generate Admonition Type Styles ---
 // =============================================================================
